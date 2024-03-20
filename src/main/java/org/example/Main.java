@@ -1,5 +1,6 @@
 package org.example;
 
+import Admin.AdminFrame;
 import Login.LoginFrame;
 import Ruta.Ruta;
 import Usuario.UsuarioFrame;
@@ -51,8 +52,9 @@ public class Main {
         listaRutas.add(ruta5);
 
 
-       new UsuarioFrame(listaRutas,listaVehiculo,listaViejes,historial);
+       //new UsuarioFrame(listaRutas,listaVehiculo,listaViejes,historial);
 
+        new AdminFrame();
 
 
     }
