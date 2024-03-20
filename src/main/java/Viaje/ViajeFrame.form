@@ -29,7 +29,7 @@
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Recargar Gasolina"/>
+                  <text value="Regresar"/>
                 </properties>
               </component>
               <component id="7d86e" class="javax.swing.JButton" binding="viaje1Button">
@@ -253,7 +253,7 @@
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Recargar Gasolina"/>
+                  <text value="Regresar"/>
                 </properties>
               </component>
               <component id="64b27" class="javax.swing.JButton" binding="viaje2Button">
@@ -477,7 +477,7 @@
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Recargar Gasolina"/>
+                  <text value="Regresar"/>
                 </properties>
               </component>
               <component id="749b4" class="javax.swing.JButton" binding="viaje3Button">

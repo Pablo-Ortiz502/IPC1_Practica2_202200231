@@ -45,6 +45,9 @@ public class ViajeFrame extends JFrame  implements Observer {
     private Thread[] hilos;
 
     private int numero;
+
+    private int conta1, conta2,conta3;
+
     private LinkedList<Viaje>listaViajes;
 
 
@@ -116,13 +119,20 @@ public class ViajeFrame extends JFrame  implements Observer {
             distancia3TextField.setText(String.valueOf(listaViajes1[2].getDistancia()));
         }
 
+        recargar1Button.setEnabled(false);
+        recargar2Button.setEnabled(false);
+        recargar3Button.setEnabled(false);
+
+        conta1 =0;
+        conta2 =0;
+        conta3 =0;
 
 
 
         viaje1Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                viaje1Button.setEnabled(false); todosButton.setEnabled(false);
+                viaje1Button.setEnabled(false); todosButton.setEnabled(false); recargar1Button.setEnabled(false);
 
                  Date date = new Date();
                  listaViajes1[0].setFecha(date.toString());
@@ -140,7 +150,7 @@ public class ViajeFrame extends JFrame  implements Observer {
         viaje2Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                viaje2Button.setEnabled(false); todosButton.setEnabled(false);
+                viaje2Button.setEnabled(false); todosButton.setEnabled(false); recargar2Button.setEnabled(false);
 
                 Date date = new Date();
                 listaViajes1[1].setFecha(date.toString());
@@ -157,7 +167,7 @@ public class ViajeFrame extends JFrame  implements Observer {
         viaje3Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                viaje3Button.setEnabled(false); todosButton.setEnabled(false);
+                viaje3Button.setEnabled(false); todosButton.setEnabled(false); recargar3Button.setEnabled(false);
 
                 Date date = new Date();
                 listaViajes1[2].setFecha(date.toString());
@@ -175,17 +185,77 @@ public class ViajeFrame extends JFrame  implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                viaje1Button.setEnabled(false); todosButton.setEnabled(false); recargar1Button.setEnabled(false);
+
+                Date date = new Date();
+                listaViajes1[0].setFecha(date.toString());
+
+                recargar1Button.setEnabled(false);
+
+                listaViajes1[0].addObserver(ViajeFrame.this::update);
+
+                inicio1Label.setText(listaViajes1[0].getFin());
+                final1Label.setText(listaViajes1[0].getInicio());
+
+                Viaje viaje = new Viaje(1,inicio1Label.getText(),final1Label.getText(),listaViajes1[0].getTipoVehiculo(),listaViajes1[0].getDistancia(),date.toString());
+
+                historial.add(viaje);
+                conta1 =1;
+                numero = 1;
+                hilos[0] = new Thread(listaViajes1[0]);
+                hilos[0].start();
+
             }
         });
         recargar2Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                viaje2Button.setEnabled(false); todosButton.setEnabled(false); recargar2Button.setEnabled(false);
+
+                Date date = new Date();
+                listaViajes1[1].setFecha(date.toString());
+
+                recargar2Button.setEnabled(false);
+
+                listaViajes1[1].addObserver(ViajeFrame.this::update);
+
+                inicio2Label.setText(listaViajes1[1].getFin());
+                final2Label.setText(listaViajes1[1].getInicio());
+
+                Viaje viaje = new Viaje(2,inicio2Label.getText(),final2Label.getText(),listaViajes1[1].getTipoVehiculo(),listaViajes1[1].getDistancia(),date.toString());
+
+                historial.add(viaje);
+                conta2=1;
+                numero = 2;
+                hilos[1] = new Thread(listaViajes1[1]);
+                hilos[1].start();
+
             }
         });
         recargar3Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                viaje3Button.setEnabled(false); todosButton.setEnabled(false); recargar3Button.setEnabled(false);
+
+                Date date = new Date();
+                listaViajes1[2].setFecha(date.toString());
+                recargar3Button.setEnabled(false);
+
+
+                listaViajes1[2].addObserver(ViajeFrame.this::update);
+
+                inicio3Label.setText(listaViajes1[2].getFin());
+                final3Label.setText(listaViajes1[2].getInicio());
+
+                Viaje viaje = new Viaje(3,inicio3Label.getText(),final3Label.getText(),listaViajes1[2].getTipoVehiculo(),listaViajes1[2].getDistancia(),date.toString());
+
+                historial.add(viaje);
+                conta3=1;
+                numero = 3;
+                hilos[2] = new Thread(listaViajes1[2]);
+                hilos[2].start();
 
             }
         });
@@ -208,10 +278,12 @@ public class ViajeFrame extends JFrame  implements Observer {
 
 
                     listaViajes1[i].addObserver(ViajeFrame.this::update);
-
                     hilos[i] = new Thread(listaViajes1[i]);
                     hilos[i].start();
                 }
+                conta1 =1;
+                conta2 =2;
+                conta3 =3;
             }
         });
         regresarButton.addActionListener(new ActionListener() {
@@ -259,22 +331,47 @@ public class ViajeFrame extends JFrame  implements Observer {
                             listaViajes.remove(i);
                         }
                     }
-
+                    if (conta1!=1){
+                        recargar1Button.setEnabled(true);
+                    }
+                    hilos[0].interrupt();
                     break;
+
                 case 2:
                     for (int i =0;i<listaViajes.size();i++){
                         if(listaViajes.get(i).getId()==2){
                             listaViajes.remove(i);
                         }
                     }
+                    if (conta2!=1){
+                        recargar2Button.setEnabled(true);
+                    }
+                    hilos[1].interrupt();
                     break;
+
                 case 3:
                     for (int i =0;i<listaViajes.size();i++){
                         if(listaViajes.get(i).getId()==3){
                             listaViajes.remove(i);
                         }
                     }
+                    if (conta3!=1){
+                        recargar3Button.setEnabled(true);
+                    }
+                    hilos[2].interrupt();
+                    break;
+
                 default:
+                    for (int i = 0; i< listaViajes.size(); i++){
+                        hilos[i].interrupt();
+                    }
+
+                    if (conta1!=1 && conta2!=1 && conta3 !=1){
+                        recargar1Button.setEnabled(true);
+                        recargar2Button.setEnabled(true);
+                        recargar3Button.setEnabled(true);
+                    }
+
                     break;
             }
 

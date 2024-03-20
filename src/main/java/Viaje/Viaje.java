@@ -3,7 +3,7 @@ package Viaje;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 
-public class Viaje extends Observable implements Runnable  {
+public class Viaje extends Observable implements Runnable {
 
     private int id;
    private String inicio;
@@ -11,9 +11,6 @@ public class Viaje extends Observable implements Runnable  {
    private String tipoVehiculo;
    private double distancia;
    private String fecha;
-    private boolean paused = false;
-
-
 
     public Viaje(int id,String inicio, String fin, String tipoVehiculo, double distancia, String fecha) {
         this.inicio = inicio;
@@ -22,15 +19,6 @@ public class Viaje extends Observable implements Runnable  {
         this.id = id;
         this.distancia = distancia;
         this.fecha = fecha;
-    }
-
-    public synchronized void pause() {
-        paused = true;
-    }
-
-    public synchronized void resume() {
-        paused = false;
-        notify();
     }
 
     public String viajeToCSV(){
@@ -96,10 +84,9 @@ public class Viaje extends Observable implements Runnable  {
             this.setChanged();
             this.notifyObservers(porcentage);
             this.clearChanged();
-                Thread.sleep(1000);
+                Thread.sleep(500);
 
             }
-            System.out.println("Hilo "+id+ " terminado");
 
         }catch (InterruptedException e) {
             System.out.println("Hilo "+id+ " terminado");
