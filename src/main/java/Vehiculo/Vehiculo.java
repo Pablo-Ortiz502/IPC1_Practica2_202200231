@@ -5,9 +5,20 @@ public class Vehiculo {
     private double gasilina;
     private String tipo;
 
-    public Vehiculo(double gasilina, String tipo) {
+    private boolean ocupado;
+
+    public Vehiculo(double gasilina, String tipo, boolean ocupado) {
         this.gasilina = gasilina;
         this.tipo = tipo;
+        this.ocupado=ocupado;
+    }
+
+    public boolean isOcupado() {
+        return ocupado;
+    }
+
+    public void setOcupado(boolean ocupado) {
+        this.ocupado = ocupado;
     }
 
     public double getGasilina() {

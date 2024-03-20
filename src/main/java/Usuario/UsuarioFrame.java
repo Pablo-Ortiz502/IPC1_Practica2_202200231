@@ -1,4 +1,5 @@
 package Usuario;
+import Login.LoginFrame;
 import Viaje.GenerarViajeFrame;
 import Ruta.Ruta;
 import Vehiculo.Vehiculo;
@@ -14,6 +15,7 @@ public class UsuarioFrame extends JFrame {
     private JButton seguirViajesButton;
     private JPanel menuFrame;
     private JButton historialButton;
+    private JButton salirButton;
 
     public UsuarioFrame(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<Viaje>historial) {
 
@@ -28,8 +30,14 @@ public class UsuarioFrame extends JFrame {
         generarViajesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new GenerarViajeFrame(listaRutas,listaVeiculo,listaViajes,historial);
-                dispose();
+
+                if(!listaRutas.isEmpty()){
+                    new GenerarViajeFrame(listaRutas,listaVeiculo,listaViajes,historial);
+                    dispose();
+                }else {
+                    JOptionPane.showMessageDialog(null, "No hay rutas disponibles", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
 
             }
         });
@@ -65,6 +73,13 @@ public class UsuarioFrame extends JFrame {
                 }else {
                     JOptionPane.showMessageDialog(null, "No se han encontado viajes finalizados", "Error", JOptionPane.ERROR_MESSAGE);
                 }
+            }
+        });
+        salirButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new LoginFrame(listaRutas,listaVeiculo,listaViajes,historial);
             }
         });
     }

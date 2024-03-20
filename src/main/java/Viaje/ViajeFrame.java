@@ -1,9 +1,10 @@
 package Viaje;
 
+import Admin.Admin;
 import Ruta.Ruta;
 import Usuario.UsuarioFrame;
 import Vehiculo.Vehiculo;
-
+import Viaje.GenerarViajeFrame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,6 +51,7 @@ public class ViajeFrame extends JFrame  implements Observer {
 
     private LinkedList<Viaje>listaViajes;
 
+    private LinkedList<Vehiculo>listaVehiculo;
 
     public ViajeFrame(Viaje[] listaViajes1, LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<Viaje>historial) {
 
@@ -63,6 +65,7 @@ public class ViajeFrame extends JFrame  implements Observer {
         this.setLocationRelativeTo(null);
         hilos = new Thread[3];
         this.listaViajes = listaViajes;
+        this.listaVehiculo = listaVeiculo;
         setSize(800,400);
 
         gas1TextField.setEnabled(false);
@@ -281,9 +284,9 @@ public class ViajeFrame extends JFrame  implements Observer {
                     hilos[i] = new Thread(listaViajes1[i]);
                     hilos[i].start();
                 }
-                conta1 =1;
+                conta1 =2;
                 conta2 =2;
-                conta3 =3;
+                conta3 =2;
             }
         });
         regresarButton.addActionListener(new ActionListener() {
@@ -335,6 +338,13 @@ public class ViajeFrame extends JFrame  implements Observer {
                         recargar1Button.setEnabled(true);
                     }
                     hilos[0].interrupt();
+
+                    for (int i=0; i<listaVehiculo.size();i++){
+                        if(tipoVtextField1.getText().equals(listaVehiculo.get(i).getTipo())){
+                            listaVehiculo.get(i).setOcupado(false);
+                        }
+                    }
+
                     break;
 
                 case 2:
@@ -347,6 +357,12 @@ public class ViajeFrame extends JFrame  implements Observer {
                         recargar2Button.setEnabled(true);
                     }
                     hilos[1].interrupt();
+
+                    for (int i=0; i<listaVehiculo.size();i++){
+                        if(tipoVtextField2.getText().equals(listaVehiculo.get(i).getTipo())){
+                            listaVehiculo.get(i).setOcupado(false);
+                        }
+                    }
                     break;
 
                 case 3:
@@ -359,6 +375,12 @@ public class ViajeFrame extends JFrame  implements Observer {
                         recargar3Button.setEnabled(true);
                     }
                     hilos[2].interrupt();
+                    for (int i=0; i<listaVehiculo.size();i++){
+                        if(tipoVtextField3.getText().equals(listaVehiculo.get(i).getTipo())){
+                            listaVehiculo.get(i).setOcupado(false);
+                        }
+                    }
+
                     break;
 
                 default:
@@ -366,10 +388,36 @@ public class ViajeFrame extends JFrame  implements Observer {
                         hilos[i].interrupt();
                     }
 
+
+
                     if (conta1!=1 && conta2!=1 && conta3 !=1){
-                        recargar1Button.setEnabled(true);
-                        recargar2Button.setEnabled(true);
-                        recargar3Button.setEnabled(true);
+                        if (listaViajes.size() ==1) {
+                            recargar1Button.setEnabled(true);
+                        }else if (listaViajes.size() ==2){
+                            recargar1Button.setEnabled(true);
+                            recargar2Button.setEnabled(true);
+                        }else{
+                            recargar1Button.setEnabled(true);
+                            recargar2Button.setEnabled(true);
+                            recargar3Button.setEnabled(true);
+                        }
+
+                    }
+
+                    for (int i=0; i<listaVehiculo.size();i++){
+                        if(tipoVtextField1.getText().equals(listaVehiculo.get(i).getTipo())){
+                            listaVehiculo.get(i).setOcupado(false);
+                        }
+                    }
+                    for (int i=0; i<listaVehiculo.size();i++){
+                        if(tipoVtextField2.getText().equals(listaVehiculo.get(i).getTipo())){
+                            listaVehiculo.get(i).setOcupado(false);
+                        }
+                    }
+                    for (int i=0; i<listaVehiculo.size();i++){
+                        if(tipoVtextField3.getText().equals(listaVehiculo.get(i).getTipo())){
+                            listaVehiculo.get(i).setOcupado(false);
+                        }
                     }
 
                     break;

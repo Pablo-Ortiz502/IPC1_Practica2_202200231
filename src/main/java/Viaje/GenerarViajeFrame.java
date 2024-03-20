@@ -22,9 +22,11 @@ public class GenerarViajeFrame extends JFrame {
     private LinkedList<Viaje> listaViajes;
     private LinkedList<Ruta> listaRuta;
 
-    private LinkedList<Vehiculo> listaVehiculo;
+    public LinkedList<Vehiculo> listaVehiculo;
 
     private int count;
+
+
 
 
     public GenerarViajeFrame(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<Viaje>historial) {
@@ -40,6 +42,7 @@ public class GenerarViajeFrame extends JFrame {
         this.listaRuta = listaRutas;
         this.listaVehiculo = listaVeiculo;
         count =0;
+
 
       DefaultComboBoxModel model = new DefaultComboBoxModel(inicioDsponible());
       inicioComboBox.setModel(model);
@@ -74,6 +77,14 @@ public class GenerarViajeFrame extends JFrame {
                         JOptionPane.showMessageDialog(null, "Limite de viajes alcanzado", "Error", JOptionPane.ERROR_MESSAGE);
                     }else {
 
+                        for (int i =0;i< listaVehiculo.size();i++){
+                            if (tipo.equals(listaVeiculo.get(i).getTipo())){
+                                listaVeiculo.get(i).setOcupado(true);
+                            }
+                        }
+                            DefaultComboBoxModel model2 = new DefaultComboBoxModel(tipoDisponible());
+                            vehiculoComboBox.setModel(model2);
+
                         for (int i =0;i<listaRutas.size();i++){
                             if (inicio.equals(listaRutas.get(i).getInicio()) && fin.equals(listaRutas.get(i).getFin())){
                                 Viaje viaje = new Viaje(id,inicio,fin,tipo,listaRutas.get(i).getDistancia(),"");
@@ -94,7 +105,7 @@ public class GenerarViajeFrame extends JFrame {
         regresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new UsuarioFrame(listaRutas,listaVeiculo,listaViajes,historial);
+                new UsuarioFrame(listaRutas,listaVehiculo,listaViajes,historial);
                 dispose();
             }
         });
@@ -143,18 +154,22 @@ public class GenerarViajeFrame extends JFrame {
     }
 
     private String[] tipoDisponible() {
-
-        String[] tipoDisponibles = new String[9];
-
-        for(int o = 0; o<listaVehiculo.size();o++){
-            tipoDisponibles[o] = listaVehiculo.get(o).getTipo();
+        int contador =0;
+        for (int i=0; i<listaVehiculo.size();i++){
+            if(!listaVehiculo.get(i).isOcupado()){
+                contador++;
+            }
         }
-
-
+        String[] tipoDisponibles = new String[contador];
+            contador =0;
+            for(int o = 0; o<listaVehiculo.size();o++){
+                if (!listaVehiculo.get(o).isOcupado()){
+                    tipoDisponibles[contador] = listaVehiculo.get(o).getTipo();
+                    contador++;
+                }
+            }
 
         return tipoDisponibles;
     }
-
-
 
 }

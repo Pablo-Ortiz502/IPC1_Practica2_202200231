@@ -1,10 +1,15 @@
 package Login;
 
 import Admin.Admin;
-
+import Ruta.Ruta;
+import Usuario.UsuarioFrame;
+import Vehiculo.Vehiculo;
+import Viaje.Viaje;
+import Admin.AdminFrame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
 public class LoginFrame extends JFrame {
 
@@ -12,7 +17,7 @@ public class LoginFrame extends JFrame {
     private JButton adminButton;
     private JButton usuarioButton;
 
-    public LoginFrame() {
+    public LoginFrame(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<Viaje>historial) {
         super();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setContentPane(loginPane);
@@ -24,22 +29,24 @@ public class LoginFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String codigo = JOptionPane.showInputDialog("Introduzca el codigo del Paciente");
-                boolean estado = false;
+                String codigo = JOptionPane.showInputDialog("Introduzca su codigo de Admin");
                 if(codigo != null){
                     if (codigo.equals(Admin.getContra())){
-                        System.out.println("Bienbenido");
+                        dispose();
+                        new AdminFrame(listaRutas,  listaVeiculo, listaViajes, historial);
 
+                    }else {
+                        JOptionPane.showMessageDialog(null, "Codigo incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
                     }
 
                 }
-
-
             }
         });
         usuarioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose();
+                new UsuarioFrame(listaRutas,  listaVeiculo, listaViajes, historial);
 
             }
         });
