@@ -1,4 +1,5 @@
 package Usuario;
+import HistorialClass.HistorialClass;
 import Login.LoginFrame;
 import Viaje.GenerarViajeFrame;
 import Ruta.Ruta;
@@ -17,7 +18,7 @@ public class UsuarioFrame extends JFrame {
     private JButton historialButton;
     private JButton salirButton;
 
-    public UsuarioFrame(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<Viaje>historial) {
+    public UsuarioFrame(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial) {
 
         super();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

@@ -1,5 +1,6 @@
 package Admin;
 
+import HistorialClass.HistorialClass;
 import Login.LoginFrame;
 import Ruta.Ruta;
 import Vehiculo.Vehiculo;
@@ -29,7 +30,7 @@ public class AdminFrame extends JFrame {
 
     private LinkedList<Ruta>listaRutas;
 
-    public AdminFrame(LinkedList<Ruta>listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<Viaje>historial) {
+    public AdminFrame(LinkedList<Ruta>listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial) {
 
         super();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

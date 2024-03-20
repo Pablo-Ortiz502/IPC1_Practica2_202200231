@@ -1,5 +1,6 @@
 package Usuario;
 
+import HistorialClass.HistorialClass;
 import Ruta.Ruta;
 import Vehiculo.Vehiculo;
 import Viaje.Viaje;
@@ -16,10 +17,10 @@ public class Historial extends JFrame {
 
     private JTable hsitorialTable;
     private DefaultTableModel tableModel;
-    private LinkedList<Viaje> historial;
+    private LinkedList<HistorialClass> historial;
     private JButton regresar;
 
-    public Historial(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<Viaje>historial){
+    public Historial(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial){
         this.historial = historial;
         regresar = new JButton("Regresar");
         setTitle("Lista de Doctores");

@@ -1,6 +1,7 @@
 package Viaje;
 
 import Admin.Admin;
+import HistorialClass.HistorialClass;
 import Ruta.Ruta;
 import Usuario.UsuarioFrame;
 import Vehiculo.Vehiculo;
@@ -53,7 +54,7 @@ public class ViajeFrame extends JFrame  implements Observer {
 
     private LinkedList<Vehiculo>listaVehiculo;
 
-    public ViajeFrame(Viaje[] listaViajes1, LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<Viaje>historial) {
+    public ViajeFrame(Viaje[] listaViajes1, LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial) {
 
 
 
@@ -139,7 +140,8 @@ public class ViajeFrame extends JFrame  implements Observer {
 
                  Date date = new Date();
                  listaViajes1[0].setFecha(date.toString());
-                 historial.add(listaViajes1[0]);
+                HistorialClass historialClass = new HistorialClass(listaViajes.get(0).getInicio(),listaViajes.get(0).getFin(),listaViajes.get(0).getTipoVehiculo(),listaViajes.get(0).getDistancia(),listaViajes.get(0).getFecha());
+                historial.add(historialClass);
 
                 listaViajes1[0].addObserver(ViajeFrame.this::update);
 
@@ -157,7 +159,8 @@ public class ViajeFrame extends JFrame  implements Observer {
 
                 Date date = new Date();
                 listaViajes1[1].setFecha(date.toString());
-                historial.add(listaViajes1[1]);
+                HistorialClass historialClass = new HistorialClass(listaViajes.get(1).getInicio(),listaViajes.get(1).getFin(),listaViajes.get(1).getTipoVehiculo(),listaViajes.get(1).getDistancia(),listaViajes.get(1).getFecha());
+                historial.add(historialClass);
 
 
                 listaViajes1[1].addObserver(ViajeFrame.this::update);
@@ -174,7 +177,8 @@ public class ViajeFrame extends JFrame  implements Observer {
 
                 Date date = new Date();
                 listaViajes1[2].setFecha(date.toString());
-                historial.add(listaViajes1[2]);
+                HistorialClass historialClass = new HistorialClass(listaViajes.get(2).getInicio(),listaViajes.get(2).getFin(),listaViajes.get(2).getTipoVehiculo(),listaViajes.get(2).getDistancia(),listaViajes.get(2).getFecha());
+                historial.add(historialClass);
 
 
                 listaViajes1[2].addObserver(ViajeFrame.this::update);
@@ -200,9 +204,9 @@ public class ViajeFrame extends JFrame  implements Observer {
                 inicio1Label.setText(listaViajes1[0].getFin());
                 final1Label.setText(listaViajes1[0].getInicio());
 
-                Viaje viaje = new Viaje(1,inicio1Label.getText(),final1Label.getText(),listaViajes1[0].getTipoVehiculo(),listaViajes1[0].getDistancia(),date.toString());
+                HistorialClass historialClass = new HistorialClass(inicio1Label.getText(),final1Label.getText(),listaViajes1[0].getTipoVehiculo(),listaViajes1[0].getDistancia(),date.toString());
 
-                historial.add(viaje);
+                historial.add(historialClass);
                 conta1 =1;
                 numero = 1;
                 hilos[0] = new Thread(listaViajes1[0]);
@@ -226,9 +230,9 @@ public class ViajeFrame extends JFrame  implements Observer {
                 inicio2Label.setText(listaViajes1[1].getFin());
                 final2Label.setText(listaViajes1[1].getInicio());
 
-                Viaje viaje = new Viaje(2,inicio2Label.getText(),final2Label.getText(),listaViajes1[1].getTipoVehiculo(),listaViajes1[1].getDistancia(),date.toString());
+                HistorialClass historialClass = new HistorialClass(inicio2Label.getText(),final2Label.getText(),listaViajes1[1].getTipoVehiculo(),listaViajes1[1].getDistancia(),date.toString());
 
-                historial.add(viaje);
+                historial.add(historialClass);
                 conta2=1;
                 numero = 2;
                 hilos[1] = new Thread(listaViajes1[1]);
@@ -252,9 +256,9 @@ public class ViajeFrame extends JFrame  implements Observer {
                 inicio3Label.setText(listaViajes1[2].getFin());
                 final3Label.setText(listaViajes1[2].getInicio());
 
-                Viaje viaje = new Viaje(3,inicio3Label.getText(),final3Label.getText(),listaViajes1[2].getTipoVehiculo(),listaViajes1[2].getDistancia(),date.toString());
+                HistorialClass historialClass = new HistorialClass(inicio3Label.getText(),final3Label.getText(),listaViajes1[2].getTipoVehiculo(),listaViajes1[2].getDistancia(),date.toString());
 
-                historial.add(viaje);
+                historial.add(historialClass);
                 conta3=1;
                 numero = 3;
                 hilos[2] = new Thread(listaViajes1[2]);
@@ -277,7 +281,9 @@ public class ViajeFrame extends JFrame  implements Observer {
                 for (int i = 0; i< listaViajes.size(); i++){
 
                     listaViajes1[i].setFecha(date.toString());
-                    historial.add(listaViajes1[i]);
+
+                    HistorialClass historialClass = new HistorialClass(listaViajes.get(i).getInicio(),listaViajes.get(i).getFin(),listaViajes.get(i).getTipoVehiculo(),listaViajes.get(i).getDistancia(),listaViajes.get(i).getFecha());
+                    historial.add(historialClass);
 
 
                     listaViajes1[i].addObserver(ViajeFrame.this::update);

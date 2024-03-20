@@ -1,4 +1,5 @@
 package Viaje;
+import HistorialClass.HistorialClass;
 import Login.LoginFrame;
 import Ruta.Ruta;
 import Usuario.UsuarioFrame;
@@ -29,7 +30,7 @@ public class GenerarViajeFrame extends JFrame {
 
 
 
-    public GenerarViajeFrame(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<Viaje>historial) {
+    public GenerarViajeFrame(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial) {
 
         super();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

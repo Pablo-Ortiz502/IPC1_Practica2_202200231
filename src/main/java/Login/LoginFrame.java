@@ -1,6 +1,7 @@
 package Login;
 
 import Admin.Admin;
+import HistorialClass.HistorialClass;
 import Ruta.Ruta;
 import Usuario.UsuarioFrame;
 import Vehiculo.Vehiculo;
@@ -17,7 +18,7 @@ public class LoginFrame extends JFrame {
     private JButton adminButton;
     private JButton usuarioButton;
 
-    public LoginFrame(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<Viaje>historial) {
+    public LoginFrame(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial) {
         super();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setContentPane(loginPane);
