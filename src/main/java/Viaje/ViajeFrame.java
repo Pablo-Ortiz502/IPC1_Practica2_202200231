@@ -9,6 +9,9 @@ import Viaje.GenerarViajeFrame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Observable;
@@ -85,6 +88,10 @@ public class ViajeFrame extends JFrame  implements Observer {
         viaje2Button.setEnabled(false);
         viaje3Button.setEnabled(false);
 
+
+
+
+
         if(listaViajes.size() ==1){
             viaje1Button.setEnabled(true);
             inicio1Label.setText(listaViajes1[0].getInicio());
@@ -143,6 +150,16 @@ public class ViajeFrame extends JFrame  implements Observer {
                 HistorialClass historialClass = new HistorialClass(listaViajes.get(0).getInicio(),listaViajes.get(0).getFin(),listaViajes.get(0).getTipoVehiculo(),listaViajes.get(0).getDistancia(),listaViajes.get(0).getFecha());
                 historial.add(historialClass);
 
+                try {
+                    FileOutputStream fos = new FileOutputStream("Historial.ser");
+                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+                    oos.writeObject(historial);
+                    oos.close();
+                } catch (IOException ex) {
+                    System.out.println("Error al serializar");
+                    throw new RuntimeException(ex);
+                }
+
                 listaViajes1[0].addObserver(ViajeFrame.this::update);
 
 
@@ -162,6 +179,15 @@ public class ViajeFrame extends JFrame  implements Observer {
                 HistorialClass historialClass = new HistorialClass(listaViajes.get(1).getInicio(),listaViajes.get(1).getFin(),listaViajes.get(1).getTipoVehiculo(),listaViajes.get(1).getDistancia(),listaViajes.get(1).getFecha());
                 historial.add(historialClass);
 
+                try {
+                    FileOutputStream fos = new FileOutputStream("Historial.ser");
+                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+                    oos.writeObject(historial);
+                    oos.close();
+                } catch (IOException ex) {
+                    System.out.println("Error al serializar");
+                    throw new RuntimeException(ex);
+                }
 
                 listaViajes1[1].addObserver(ViajeFrame.this::update);
                 numero = 2;
@@ -179,6 +205,16 @@ public class ViajeFrame extends JFrame  implements Observer {
                 listaViajes1[2].setFecha(date.toString());
                 HistorialClass historialClass = new HistorialClass(listaViajes.get(2).getInicio(),listaViajes.get(2).getFin(),listaViajes.get(2).getTipoVehiculo(),listaViajes.get(2).getDistancia(),listaViajes.get(2).getFecha());
                 historial.add(historialClass);
+                try {
+                FileOutputStream fos = new FileOutputStream("Historial.ser");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                    oos.writeObject(historial);
+                    oos.close();
+                } catch (IOException ex) {
+                    System.out.println("Error al serializar");
+                    throw new RuntimeException(ex);
+                }
+
 
 
                 listaViajes1[2].addObserver(ViajeFrame.this::update);
@@ -207,6 +243,17 @@ public class ViajeFrame extends JFrame  implements Observer {
                 HistorialClass historialClass = new HistorialClass(inicio1Label.getText(),final1Label.getText(),listaViajes1[0].getTipoVehiculo(),listaViajes1[0].getDistancia(),date.toString());
 
                 historial.add(historialClass);
+
+                try {
+                    FileOutputStream fos = new FileOutputStream("Historial.ser");
+                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+                    oos.writeObject(historial);
+                    oos.close();
+                } catch (IOException ex) {
+                    System.out.println("Error al serializar");
+                    throw new RuntimeException(ex);
+                }
+
                 conta1 =1;
                 numero = 1;
                 hilos[0] = new Thread(listaViajes1[0]);
@@ -233,6 +280,17 @@ public class ViajeFrame extends JFrame  implements Observer {
                 HistorialClass historialClass = new HistorialClass(inicio2Label.getText(),final2Label.getText(),listaViajes1[1].getTipoVehiculo(),listaViajes1[1].getDistancia(),date.toString());
 
                 historial.add(historialClass);
+
+                try {
+                    FileOutputStream fos = new FileOutputStream("Historial.ser");
+                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+                    oos.writeObject(historial);
+                    oos.close();
+                } catch (IOException ex) {
+                    System.out.println("Error al serializar");
+                    throw new RuntimeException(ex);
+                }
+
                 conta2=1;
                 numero = 2;
                 hilos[1] = new Thread(listaViajes1[1]);
@@ -259,6 +317,17 @@ public class ViajeFrame extends JFrame  implements Observer {
                 HistorialClass historialClass = new HistorialClass(inicio3Label.getText(),final3Label.getText(),listaViajes1[2].getTipoVehiculo(),listaViajes1[2].getDistancia(),date.toString());
 
                 historial.add(historialClass);
+
+                try {
+                    FileOutputStream fos = new FileOutputStream("Historial.ser");
+                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+                    oos.writeObject(historial);
+                    oos.close();
+                } catch (IOException ex) {
+                    System.out.println("Error al serializar");
+                    throw new RuntimeException(ex);
+                }
+
                 conta3=1;
                 numero = 3;
                 hilos[2] = new Thread(listaViajes1[2]);
@@ -284,7 +353,15 @@ public class ViajeFrame extends JFrame  implements Observer {
 
                     HistorialClass historialClass = new HistorialClass(listaViajes.get(i).getInicio(),listaViajes.get(i).getFin(),listaViajes.get(i).getTipoVehiculo(),listaViajes.get(i).getDistancia(),listaViajes.get(i).getFecha());
                     historial.add(historialClass);
-
+                    try {
+                        FileOutputStream fos = new FileOutputStream("Historial.ser");
+                        ObjectOutputStream oos = new ObjectOutputStream(fos);
+                        oos.writeObject(historial);
+                        oos.close();
+                    } catch (IOException ex) {
+                        System.out.println("Error al serializar");
+                        throw new RuntimeException(ex);
+                    }
 
                     listaViajes1[i].addObserver(ViajeFrame.this::update);
                     hilos[i] = new Thread(listaViajes1[i]);

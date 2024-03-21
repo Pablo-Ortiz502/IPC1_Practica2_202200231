@@ -9,6 +9,10 @@ import Viaje.ViajeFrame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 
 public class UsuarioFrame extends JFrame {
@@ -17,6 +21,7 @@ public class UsuarioFrame extends JFrame {
     private JPanel menuFrame;
     private JButton historialButton;
     private JButton salirButton;
+    private JButton borrarHistorialButton;
 
     public UsuarioFrame(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial) {
 
@@ -81,6 +86,38 @@ public class UsuarioFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 new LoginFrame(listaRutas,listaVeiculo,listaViajes,historial);
+            }
+        });
+        borrarHistorialButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if(!historial.isEmpty()){
+                    try {
+                        int b = historial.size();
+                        for (int i =b; i>0;i--){
+                            historial.remove(i-1);
+                        }
+
+                        FileOutputStream fos = new FileOutputStream("Historial.ser");
+                        ObjectOutputStream oos = new ObjectOutputStream(fos);
+                        oos.writeObject(historial);
+                        oos.close();
+                    }catch (IOException ex){
+                        throw new RuntimeException(ex);
+                    }
+
+
+
+                    JOptionPane.showMessageDialog(null, "Historial borrado", "Error", JOptionPane.INFORMATION_MESSAGE);
+
+                }else {
+                    JOptionPane.showMessageDialog(null, "No se han encontado viajes finalizados", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+
+
+
             }
         });
     }

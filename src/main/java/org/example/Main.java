@@ -10,22 +10,25 @@ import Viaje.GenerarViajeFrame;
 import Viaje.Viaje;
 import Viaje.ViajeFrame;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.LinkedList;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         LinkedList<Viaje> listaViejes = new LinkedList<>();
         LinkedList<HistorialClass>historial = new LinkedList<>();
         LinkedList<Ruta> listaRutas = new LinkedList<>();
 
-        FileOutputStream fos = new FileOutputStream("Historial.ser");
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(historial);
-        oos.close();
-        new LoginFrame(listaRutas,Admin.getListaVehiculo(),listaViejes,historial);
+
+
+
+        FileInputStream fis = new FileInputStream("Historial.ser");
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        LinkedList<HistorialClass> historialdes = (LinkedList<HistorialClass>) ois.readObject();
+        ois.close();
+
+
+        new LoginFrame(listaRutas,Admin.getListaVehiculo(),listaViejes,historialdes);
 
 
     }
