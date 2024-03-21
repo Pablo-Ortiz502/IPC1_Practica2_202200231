@@ -23,7 +23,7 @@ public class Historial extends JFrame {
     public Historial(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial,LinkedList<HistorialClass> viajeHi){
         this.historial = historial;
         regresar = new JButton("Regresar");
-        setTitle("Lista de Doctores");
+        setTitle("<Historial>");
         setSize(1000, 300);
         setLocationRelativeTo(null);
         String[] columnNames = {"Feecha","Inicio","fin","Tipo de Vhiculo","distancia"};
