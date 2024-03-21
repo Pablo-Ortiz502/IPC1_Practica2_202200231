@@ -30,7 +30,7 @@ public class AdminFrame extends JFrame {
 
     private LinkedList<Ruta>listaRutas;
 
-    public AdminFrame(LinkedList<Ruta>listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial) {
+    public AdminFrame(LinkedList<Ruta>listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial,LinkedList<HistorialClass> viajeHi) {
 
         super();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -175,7 +175,7 @@ public class AdminFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new LoginFrame( listaRutas,  listaVeiculo, listaViajes, historial);
+                new LoginFrame( listaRutas,  listaVeiculo, listaViajes, historial,viajeHi);
 
             }
         });

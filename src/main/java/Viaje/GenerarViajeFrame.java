@@ -7,6 +7,9 @@ import Vehiculo.Vehiculo;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -30,7 +33,7 @@ public class GenerarViajeFrame extends JFrame {
 
 
 
-    public GenerarViajeFrame(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial) {
+    public GenerarViajeFrame(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial,LinkedList<HistorialClass> viajeHi) {
 
         super();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -78,6 +81,8 @@ public class GenerarViajeFrame extends JFrame {
                         JOptionPane.showMessageDialog(null, "Limite de viajes alcanzado", "Error", JOptionPane.ERROR_MESSAGE);
                     }else {
 
+
+
                         for (int i =0;i< listaVehiculo.size();i++){
                             if (tipo.equals(listaVeiculo.get(i).getTipo())){
                                 listaVeiculo.get(i).setOcupado(true);
@@ -89,9 +94,24 @@ public class GenerarViajeFrame extends JFrame {
                         for (int i =0;i<listaRutas.size();i++){
                             if (inicio.equals(listaRutas.get(i).getInicio()) && fin.equals(listaRutas.get(i).getFin())){
                                 Viaje viaje = new Viaje(id,inicio,fin,tipo,listaRutas.get(i).getDistancia(),"");
+                                HistorialClass historialClass = new HistorialClass(inicio,fin,tipo,listaRutas.get(i).getDistancia(),"");
                                 listaViajes.add(viaje);
+                                viajeHi.add(historialClass);
                             }
                         }
+
+                        try {
+
+                            FileOutputStream fos = new FileOutputStream("Viajes.ser");
+                            ObjectOutputStream oos = new ObjectOutputStream(fos);
+                            oos.writeObject(viajeHi);
+                            oos.close();
+                        }catch (IOException ex){
+                            throw new RuntimeException(ex);
+                        }
+
+
+
                         JOptionPane.showMessageDialog(null, "Viaje creado", "Exito", JOptionPane.INFORMATION_MESSAGE);
 
                     }
@@ -106,7 +126,7 @@ public class GenerarViajeFrame extends JFrame {
         regresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new UsuarioFrame(listaRutas,listaVehiculo,listaViajes,historial);
+                new UsuarioFrame(listaRutas,listaVehiculo,listaViajes,historial,viajeHi);
                 dispose();
             }
         });

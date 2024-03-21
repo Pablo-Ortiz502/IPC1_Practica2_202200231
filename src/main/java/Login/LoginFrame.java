@@ -18,7 +18,7 @@ public class LoginFrame extends JFrame {
     private JButton adminButton;
     private JButton usuarioButton;
 
-    public LoginFrame(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial) {
+    public LoginFrame(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial,LinkedList<HistorialClass> viajeHi) {
         super();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setContentPane(loginPane);
@@ -34,7 +34,7 @@ public class LoginFrame extends JFrame {
                 if(codigo != null){
                     if (codigo.equals(Admin.getContra())){
                         dispose();
-                        new AdminFrame(listaRutas,  listaVeiculo, listaViajes, historial);
+                        new AdminFrame(listaRutas,  listaVeiculo, listaViajes, historial,viajeHi);
 
                     }else {
                         JOptionPane.showMessageDialog(null, "Codigo incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
@@ -47,7 +47,7 @@ public class LoginFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new UsuarioFrame(listaRutas,  listaVeiculo, listaViajes, historial);
+                new UsuarioFrame(listaRutas,  listaVeiculo, listaViajes, historial,viajeHi);
 
             }
         });

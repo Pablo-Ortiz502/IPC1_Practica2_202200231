@@ -9,9 +9,7 @@ import Viaje.GenerarViajeFrame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Observable;
@@ -57,12 +55,14 @@ public class ViajeFrame extends JFrame  implements Observer {
 
     private LinkedList<Vehiculo>listaVehiculo;
 
-    public ViajeFrame(Viaje[] listaViajes1, LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial) {
+    private LinkedList<HistorialClass> viajeHi;
+
+    public ViajeFrame(Viaje[] listaViajes1, LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial, LinkedList<HistorialClass> viajeHi) {
 
 
 
         super();
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.setContentPane(viajesJpane);
         this.pack();
         this.setVisible(true);
@@ -70,6 +70,7 @@ public class ViajeFrame extends JFrame  implements Observer {
         hilos = new Thread[3];
         this.listaViajes = listaViajes;
         this.listaVehiculo = listaVeiculo;
+        this.viajeHi = viajeHi;
         setSize(800,400);
 
         gas1TextField.setEnabled(false);
@@ -297,6 +298,8 @@ public class ViajeFrame extends JFrame  implements Observer {
                 hilos[1].start();
 
             }
+
+
         });
         recargar3Button.addActionListener(new ActionListener() {
             @Override
@@ -376,10 +379,30 @@ public class ViajeFrame extends JFrame  implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-               new UsuarioFrame(listaRutas,listaVeiculo,listaViajes,historial);
+               new UsuarioFrame(listaRutas,listaVeiculo,listaViajes,historial,viajeHi);
+
+               int c = viajeHi.size();
+               for (int i = c; i>0; i--){
+                   viajeHi.remove(i-1);
+               }
+
+               for (int i =0; i< listaViajes.size();i++){
+                   HistorialClass historialClass = new HistorialClass(listaViajes.get(i).getInicio(),listaViajes.get(i).getFin(),listaViajes.get(i).getTipoVehiculo(),listaViajes.get(i).getDistancia(),listaViajes.get(i).getFecha());
+                   viajeHi.add(historialClass);
+               }
+
+                try {
+
+             FileOutputStream fos = new FileOutputStream("Viajes.ser");
+             ObjectOutputStream oos = new ObjectOutputStream(fos);
+             oos.writeObject(viajeHi);
+             oos.close();
+              }catch (IOException ex){
+                throw new RuntimeException(ex);
+                }
 
 
-            }
+                }
         });
     }
 
@@ -415,6 +438,7 @@ public class ViajeFrame extends JFrame  implements Observer {
                     for (int i =0;i<listaViajes.size();i++){
                         if(listaViajes.get(i).getId()==1){
                             listaViajes.remove(i);
+                            viajeHi.remove(i);
                         }
                     }
                     if (conta1!=1){
@@ -434,6 +458,7 @@ public class ViajeFrame extends JFrame  implements Observer {
                     for (int i =0;i<listaViajes.size();i++){
                         if(listaViajes.get(i).getId()==2){
                             listaViajes.remove(i);
+                            viajeHi.remove(i);
                         }
                     }
                     if (conta2!=1){
@@ -452,6 +477,7 @@ public class ViajeFrame extends JFrame  implements Observer {
                     for (int i =0;i<listaViajes.size();i++){
                         if(listaViajes.get(i).getId()==3){
                             listaViajes.remove(i);
+                            viajeHi.remove(i);
                         }
                     }
                     if (conta3!=1){
@@ -469,6 +495,7 @@ public class ViajeFrame extends JFrame  implements Observer {
                 default:
                     for (int i = 0; i< listaViajes.size(); i++){
                         hilos[i].interrupt();
+                        viajeHi.remove(i);
                     }
 
 

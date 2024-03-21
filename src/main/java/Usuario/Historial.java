@@ -20,7 +20,7 @@ public class Historial extends JFrame {
     private LinkedList<HistorialClass> historial;
     private JButton regresar;
 
-    public Historial(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial){
+    public Historial(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial,LinkedList<HistorialClass> viajeHi){
         this.historial = historial;
         regresar = new JButton("Regresar");
         setTitle("Lista de Doctores");
@@ -76,7 +76,7 @@ public class Historial extends JFrame {
         regresar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               new UsuarioFrame(listaRutas,listaVeiculo,listaViajes,historial);
+               new UsuarioFrame(listaRutas,listaVeiculo,listaViajes,historial,viajeHi);
                 dispose();
             }
         });

@@ -23,7 +23,7 @@ public class UsuarioFrame extends JFrame {
     private JButton salirButton;
     private JButton borrarHistorialButton;
 
-    public UsuarioFrame(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial) {
+    public UsuarioFrame(LinkedList<Ruta> listaRutas, LinkedList<Vehiculo> listaVeiculo, LinkedList<Viaje> listaViajes, LinkedList<HistorialClass>historial,LinkedList<HistorialClass> viajeHi) {
 
         super();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -38,7 +38,7 @@ public class UsuarioFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 if(!listaRutas.isEmpty()){
-                    new GenerarViajeFrame(listaRutas,listaVeiculo,listaViajes,historial);
+                    new GenerarViajeFrame(listaRutas,listaVeiculo,listaViajes,historial,viajeHi);
                     dispose();
                 }else {
                     JOptionPane.showMessageDialog(null, "No hay rutas disponibles", "Error", JOptionPane.ERROR_MESSAGE);
@@ -53,6 +53,7 @@ public class UsuarioFrame extends JFrame {
 
                 Viaje[] listaViajes1 = new Viaje[3];
 
+
                 if (!listaViajes.isEmpty()){
                    int contador =1;
                     for (int i =0; i<listaViajes.size(); i++){
@@ -60,7 +61,7 @@ public class UsuarioFrame extends JFrame {
                        listaViajes1[i].setId(contador);
                        contador++;
                     }
-                    new ViajeFrame(listaViajes1,listaRutas,listaVeiculo,listaViajes,historial);
+                    new ViajeFrame(listaViajes1,listaRutas,listaVeiculo,listaViajes,historial,viajeHi);
                     dispose();
 
                 }else {
@@ -74,7 +75,7 @@ public class UsuarioFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(!historial.isEmpty()){
                     dispose();
-                    new Historial(listaRutas,listaVeiculo,listaViajes,historial).setVisible(true);
+                    new Historial(listaRutas,listaVeiculo,listaViajes,historial,viajeHi).setVisible(true);
 
                 }else {
                     JOptionPane.showMessageDialog(null, "No se han encontado viajes finalizados", "Error", JOptionPane.ERROR_MESSAGE);
@@ -85,7 +86,7 @@ public class UsuarioFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new LoginFrame(listaRutas,listaVeiculo,listaViajes,historial);
+                new LoginFrame(listaRutas,listaVeiculo,listaViajes,historial,viajeHi);
             }
         });
         borrarHistorialButton.addActionListener(new ActionListener() {

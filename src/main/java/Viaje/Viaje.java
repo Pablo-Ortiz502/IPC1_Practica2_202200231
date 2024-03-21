@@ -94,6 +94,15 @@ public class Viaje extends Observable implements Runnable {
     }
 
 
-
-
+    @Override
+    public String toString() {
+        return "Viaje{" +
+                "id=" + id +
+                ", inicio='" + inicio + '\'' +
+                ", fin='" + fin + '\'' +
+                ", tipoVehiculo='" + tipoVehiculo + '\'' +
+                ", distancia=" + distancia +
+                ", fecha='" + fecha + '\'' +
+                '}';
+    }
 }
