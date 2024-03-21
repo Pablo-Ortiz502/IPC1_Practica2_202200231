@@ -157,7 +157,6 @@ public class ViajeFrame extends JFrame  implements Observer {
                     oos.writeObject(historial);
                     oos.close();
                 } catch (IOException ex) {
-                    System.out.println("Error al serializar");
                     throw new RuntimeException(ex);
                 }
 
@@ -186,7 +185,6 @@ public class ViajeFrame extends JFrame  implements Observer {
                     oos.writeObject(historial);
                     oos.close();
                 } catch (IOException ex) {
-                    System.out.println("Error al serializar");
                     throw new RuntimeException(ex);
                 }
 
@@ -212,7 +210,6 @@ public class ViajeFrame extends JFrame  implements Observer {
                     oos.writeObject(historial);
                     oos.close();
                 } catch (IOException ex) {
-                    System.out.println("Error al serializar");
                     throw new RuntimeException(ex);
                 }
 
@@ -251,7 +248,6 @@ public class ViajeFrame extends JFrame  implements Observer {
                     oos.writeObject(historial);
                     oos.close();
                 } catch (IOException ex) {
-                    System.out.println("Error al serializar");
                     throw new RuntimeException(ex);
                 }
 
@@ -288,7 +284,6 @@ public class ViajeFrame extends JFrame  implements Observer {
                     oos.writeObject(historial);
                     oos.close();
                 } catch (IOException ex) {
-                    System.out.println("Error al serializar");
                     throw new RuntimeException(ex);
                 }
 
@@ -327,7 +322,6 @@ public class ViajeFrame extends JFrame  implements Observer {
                     oos.writeObject(historial);
                     oos.close();
                 } catch (IOException ex) {
-                    System.out.println("Error al serializar");
                     throw new RuntimeException(ex);
                 }
 
@@ -362,7 +356,6 @@ public class ViajeFrame extends JFrame  implements Observer {
                         oos.writeObject(historial);
                         oos.close();
                     } catch (IOException ex) {
-                        System.out.println("Error al serializar");
                         throw new RuntimeException(ex);
                     }
 

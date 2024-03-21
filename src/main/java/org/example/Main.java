@@ -46,8 +46,6 @@ public class Main {
                 contador++;
             }
         }
-        System.out.println(viajesHi);
-        System.out.println(listaViejes);
 
         new LoginFrame(listaRutas,Admin.getListaVehiculo(),listaViejes,historialdes,viajesHi);
 

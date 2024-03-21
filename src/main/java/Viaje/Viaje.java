@@ -89,7 +89,6 @@ public class Viaje extends Observable implements Runnable {
             }
 
         }catch (InterruptedException e) {
-            System.out.println("Hilo "+id+ " terminado");
         }
     }
 
